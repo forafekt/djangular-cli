@@ -1,0 +1,10 @@
+# Requirements for Djangular-Cli.
+regex
+PyInquirer
+pip
+virtualenv
+setuptools
+django-environ # environ
+distlib
+Django
+pyfiglet

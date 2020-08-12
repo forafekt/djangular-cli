@@ -1,0 +1,28 @@
+<!doctype html>
+{% load static %}
+{% load serve_tags %}
+<html class="no-js" lang="i18n">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Hybricam{% endblock title %}</title>
+  <base href="/">
+  
+  {% block head %}{% manifest_meta %}{% endblock head %}
+
+  {% serve_fonts %}
+  {% serve_css %}
+</head>
+
+<body class="mat-typography">
+{% block body %}
+
+<app-root>{% block content%}{% endblock content %}</app-root>
+
+
+  <!-- JS -->
+  {% serve_js %}
+  {% block js %}{% endblock js %}
+
+{% endblock body %}
+</body>
+</html>
