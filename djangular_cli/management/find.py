@@ -2,7 +2,7 @@ import subprocess
 import sys
 import time
 
-import pip # noqa
+import pip  # noqa
 
 from djangular_cli.config.app_settings import OSEnv, djangular_root_dir
 
@@ -22,9 +22,6 @@ def check_modules():
         print(modules, "is installed. Please continue to enter your project name..\n")
     else:
         print("▸", modules, "not installed...\n"
-                       f"=> Installing {modules} ...")
+                            f"=> Installing {modules} ...")
         time.sleep(5)
         pip.main(["install", "--prefix", venv_dir, "-r", requirements])
-
-
-
