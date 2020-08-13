@@ -8,15 +8,15 @@ def cmd_django():
     """
     Start Django Project
     """
-    django_executable_path = getattr(app_settings, 'DJANGO_EXECUTABLE_PATH', 'django-admin')
+    django_executable_path = getattr(app_settings, 'DJANGO_EXECUTE', 'django-admin')
     command = [django_executable_path, 'startproject',
-               input("Django Project Name [dist]: ")]
+               input("▸ "+"Django Project Name [djng_project]: ")]
     process = subprocess.Popen(
         command,
         env={'PATH': OSget('PATH')},
     )
     process.wait()
-    return print("New Django project created in: ", current_dir)
+    return print("▸", "New Django project created in: ", current_dir)
 
 
 def get_django_root_path():

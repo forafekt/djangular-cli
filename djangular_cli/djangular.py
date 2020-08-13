@@ -5,8 +5,6 @@ Code readability: 'cmd' reused from DJANGUALR settings
 """""
 import argparse
 
-from djangular_cli.generate.g_django import cmd_django
-
 from djangular_cli import cli
 from djangular_cli.config.app_settings import cmd
 from djangular_cli.serve.serve import build_angular
@@ -63,7 +61,7 @@ def main():
     if start == str("start"):
         cli.client()
     else:
-        raise ArgDoesNotExist("Did you mean 'djangular -b start'?")
+        raise ArgDoesNotExist("'djangular -b start'?")
 
     """""
     Git clone
@@ -80,10 +78,6 @@ def main():
     """""
     Create Django project
     """""
-    if django:
-        cmd_django()
-    else:
-        raise ArgDoesNotExist("Error with Django loader")
 
 
 if __name__ == '__main__':

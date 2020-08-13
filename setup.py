@@ -1,26 +1,25 @@
 import setuptools
-import pkg_resources
 
 from djangular_cli.config.app_settings import djangular_root_dir, join, PathDirName, root
 
 app = djangular_root_dir
 here = root
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
-
-__all__ = ["__version__"]
+__al__ = ["__version__"]
 
 with open(join(here, 'VERSION')) as f:
     __version__ = f.read().strip()
 
-with open(join(here, 'requirements.txt')) as f:
-    required = f.read().splitlines()
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
+with open(join(here, 'MANIFEST.in')) as f:
+    MANIFEST = f.read().strip()
 
 extra_files = [
-    join(here, 'requirements.txt'),
     join(here, 'VERSION'),
-    join(here, 'README.md')
+    join(here, 'README.md'),
+    join(here, 'MANIFEST.in')
 ]
 
 setuptools.setup(
@@ -31,11 +30,15 @@ setuptools.setup(
     package_data={"": extra_files},
     project_urls={
         "Bug Tracker": "https://github.com/forafekt/djangular-cli/issues",
-        "Documentation": "https://github.com/forafekt/djangular-cli/doc",
+        "Documentation": "https://github.com/forafekt/djangular-cli/tree/master/djangular_cli/docs",
         "Source Code": "https://github.com/forafekt/djangular-cli",
     },
-    install_requires=required,
+
     packages=setuptools.find_packages(),
+    scripts=[
+        # 'djangular_cli/generate/bin/ng',
+        'djangular_cli/generate/bin/django-admin'
+    ],
     entry_points={
         'console_scripts': [
             'djangular=djangular_cli:main',
@@ -44,8 +47,10 @@ setuptools.setup(
 
     author="Jonny Doyle",
     author_email="jonathan.d@programmer.net",
+    license="MIT",
     description="Django / Angular project management.",
     keywords="django angular client template boilerplate git automate",
+    platform="Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/forafekt/djangular-cli",

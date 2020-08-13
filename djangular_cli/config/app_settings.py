@@ -31,13 +31,13 @@ root = (environ.Path(__file__)) - 3
 Django settings
 """""
 DJANGO_ROOT_PATH = current_dir
-DJANGO_EXECUTE = "django-admin"
+DJANGO_EXECUTE = djangular_root_dir("generate/bin/django-admin")
 
 """""
 Angular settings
 """""
 NG_ROOT_PATH = current_dir
-NG_EXECUTE = "ng"
+NG_EXECUTE = "ng"  # djangular_root_dir("generate/bin/ng")
 
 
 

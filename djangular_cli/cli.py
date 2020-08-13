@@ -5,12 +5,14 @@ from __future__ import print_function, unicode_literals
 
 from PyInquirer import prompt
 
-from djangular_cli.config.style.style import style
+from djangular_cli.config.style.color_style import style
 from djangular_cli.config.style.widget import widget
 from djangular_cli.generate.g_angular import cmd_angular
 from djangular_cli.generate.g_django import cmd_django
 from djangular_cli.generate.g_venv import cmd_env
 from djangular_cli.git.git import djangular_boilerplate
+from djangular_cli.management.exceptions import ReqModuleNotExist
+from djangular_cli.management.find import check_modules
 
 
 def client():
@@ -46,28 +48,31 @@ def client():
         },
     ]
     answers = prompt(questions, style=style)
+    try:
+        if answers.get('CreateVirtualEnvironment', True):
+            cmd_env()
+        else:
+            pass
 
-    if answers.get('CreateVirtualEnvironment', True):
-        cmd_env()
-    else:
-        pass
+        if answers.get('DjangularBoilerplate', True):
+            djangular_boilerplate()
+        else:
+            pass
 
-    if answers.get('DjangularBoilerplate', True):
-        djangular_boilerplate()
-    else:
-        pass
+        if answers.get('CreateDjangoProject', True):
+            check_modules()
+            cmd_django()
+        else:
+            pass
 
-    if answers.get('CreateDjangoProject', True):
-        cmd_django()
-    else:
-        pass
+        if answers.get('CreateAngularProject', True):
+            cmd_angular()
+        else:
+            pass
+    except KeyboardInterrupt:
+        print("\n => You have force cancelled the session.\n")
 
-    if answers.get('CreateAngularProject', True):
-        cmd_angular()
-    else:
-        pass
-
-    exit("Thank You for using Djangular.  Please visit https://djangular.com")
+        exit("Thank You for using Djangular.  Please visit https://djangular.com")
 
 
 if __name__ == '__main__':

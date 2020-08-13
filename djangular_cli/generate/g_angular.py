@@ -8,7 +8,8 @@ def cmd_angular():
     """
     Start Angular project.
     """
-    command = [NG_EXECUTE, 'new', '--routing', '--style=scss']
+    ng_executable_path = getattr(app_settings, 'NG_EXECUTE', 'django-admin')
+    command = [ng_executable_path, 'new', '--routing', '--style=scss']
     process = subprocess.Popen(
         command,
         env={'PATH': OSget('PATH')},

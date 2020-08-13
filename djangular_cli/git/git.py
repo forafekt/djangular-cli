@@ -34,9 +34,9 @@ def djangular_boilerplate():
     Clones the passed repo to my staging dir
     """
 
-    git_url = "https://" + input("[github.com][other]: ")
-    user = input("Author: ")
-    package_name = input("Package name: ")
+    git_url = "https://" + input("▸ "+"[github.com][other]: ")
+    user = input("▸ "+"Author: ")
+    package_name = input("▸ "+"Package name: ")
 
     result = git_url + "/" + user + "/" + package_name + ".git"
 
