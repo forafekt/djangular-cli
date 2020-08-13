@@ -28,7 +28,7 @@ class ReqModuleNotExist(DjangularException):
     """
     def __init__(self, module):
         if self.args is ReqModuleNotExist:
-            raise  module
+            raise module
         return print("Module %s not found: " % module)
 
 
