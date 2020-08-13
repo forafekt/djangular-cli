@@ -37,6 +37,6 @@ def cmd_env():
         exec(code, dict(__file__=activate_file))
 
     # Automatically install project requirements
-    requirements = djangular_root_dir("dependencies/requires.txt")
+    requirements = djangular_root_dir("dependencies/requirements.txt")
     if name_env:
         pip.main(["install", "--prefix", venv_dir, "-r", requirements])
