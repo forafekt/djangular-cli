@@ -2,12 +2,12 @@
 """""
 DJANGULAR CLI args
 Code readability: 'cmd' reused from DJANGUALR settings
+IN DEVELOPMENT
 """""
 import argparse
 
 from djangular_cli import cli
 from djangular_cli.config.app_settings import cmd
-from djangular_cli.serve.serve import build_angular
 from djangular_cli.management.exceptions import ArgDoesNotExist
 
 
@@ -34,6 +34,12 @@ def main():
         type=str,
         help='Run Git Clone'
     )
+    parser.add_argument(
+        '-env',
+        '--virtualenv',
+        type=str,
+        help='Activate Virtualenv'
+    )
 
     parser.add_argument(
         '-srv',
@@ -52,19 +58,27 @@ def main():
     args = parser.parse_args()
     serve = args.serve
     start = args.begin
+    activate = args.virtualenv
     clone = args.git_clone
     django = args.django
 
     """""
     Open client
     """""
+    # TODO: TEMP
     if start == str("start"):
         cli.client()
     else:
-        raise ArgDoesNotExist("'djangular -b start'?")
+        assert ArgDoesNotExist("'djangular -b start'?")
 
     """""
-    Git clone
+    Activate env
+    """""
+
+    # TODO: Make venv args
+
+    """""
+    Git clone # TEMP
     """""
     if clone:
         cmd("git " + "clone " + clone)
@@ -72,12 +86,16 @@ def main():
     """""
     Build Angular to Django static
     """""
-    if serve:
-        build_angular()
+    # TODO: Make build script args
+    """""
+    Create Django project
+    """""
+    # TODO: Make gen django args
 
     """""
     Create Django project
     """""
+    # TODO: Make gen angular args
 
 
 if __name__ == '__main__':
