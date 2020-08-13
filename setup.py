@@ -1,6 +1,10 @@
+"""""
+setup module
+"""""
+
 import setuptools
 
-from djangular_cli.config.app_settings import djangular_root_dir, join, PathDirName, root
+from djangular_cli.config.app_settings import djangular_root_dir, join, root
 
 app = djangular_root_dir
 here = root
