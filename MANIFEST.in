@@ -1,4 +1,4 @@
-include requires.txt
+include requirements.txt
 include VERSION
 include README.md
 include djangular_cli/generate/bin/*
