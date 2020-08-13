@@ -6,5 +6,4 @@ virtualenv
 setuptools
 django-environ # environ
 distlib
-Django
 pyfiglet
