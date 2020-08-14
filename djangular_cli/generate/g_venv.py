@@ -8,7 +8,7 @@ from djangular_cli.config.app_settings import \
     djangular_root_dir, \
     current_dir, \
     join, \
-    expanduser, cmd
+    expanduser
 
 
 def cmd_env():
@@ -21,8 +21,8 @@ def cmd_env():
     """
     # Create, choose path/name and activate the virtual environment
     print("Press Enter to install in current directory: " + current_dir)
-    choose_path = input("▸ "+"Choose your Virtualenv path: ")
-    name_env = input("▸ "+"Name your Virtualenv [djangular_env]: ")
+    choose_path = input("▸ " + "Choose your Virtualenv path: ")
+    name_env = input("▸ " + "Name your Virtualenv [djangular_env]: ")
     venv_dir = join(expanduser(choose_path), name_env)
     cli_run([venv_dir])
     if choose_path or name_env:
