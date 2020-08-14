@@ -1,14 +1,14 @@
 """
 Create Virtual Environment for your project and automatically install requirements.
 """
-import pip # noqa F405
+import pip  # noqa F405
 from virtualenv import cli_run
 
 from djangular_cli.config.app_settings import \
     djangular_root_dir, \
     current_dir, \
     join, \
-    expanduser
+    expanduser, cmd
 
 
 def cmd_env():
