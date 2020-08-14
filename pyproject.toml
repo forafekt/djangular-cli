@@ -1,0 +1,43 @@
+[project]
+name = "djangular-cli"
+version = "VERSION"
+description = "Django / Angular project management."
+authors = [
+    "Jonny Doyle <jonathan.d@programmer.net>"
+]
+license = "MIT"
+readme = "README.md"
+python = "^3.6"
+homepage = "https://github.com/forafekt/djangular-cli"
+repository = "https://github.com/forafekt/djangular-cli"
+documentation = "https://github.com/forafekt/djangular-cli/tree/master/djangular_cli/docs"
+
+keywords = ["django", "angular", "client", "template", "boilerplate", "git", "automate"]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    'Intended Audience :: Developers',
+    'Topic :: Software Development :: Build Tools',
+]
+
+# Requirements
+[dependencies]
+PyInquirer = "^1.0.3"
+virtualenv = "^20.0.30"
+pyfiglet = "^0.7"
+django-environ = "^0.4.5"
+
+[dev-dependencies]
+
+
+[scripts]
+poetry = "djangular=djangular_cli:main"
+
+[build-system]
+requires = [
+    "setuptools >= 49.6.0",
+    "setuptools_scm >= 4.1.2, <3"
+]
+build-backend = "setuptools.build_meta"
