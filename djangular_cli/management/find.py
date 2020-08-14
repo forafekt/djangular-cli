@@ -18,13 +18,17 @@ def check_modules():
     Module Check
     """
     if is_venv():
-        print('inside virtualenv or venv')
+        print('Checking for Virtualenv...')
+        time.sleep(2)
+        print('Virtualenv exists... Continuing setup.')
     else:
-        print('outside virtualenv or venv')
+        print('No Virtualenv...\n'
+              'Please setup Virtualenv to install modules.')
+        time.sleep(2)
         try:
             cmd_env()
         except:
-            exit("Done")
+            exit("Finishing setup...")
 
     venv_dir = OSEnv["VIRTUAL_ENV"]
     requirements = djangular_root_dir("dependencies/django.txt")
