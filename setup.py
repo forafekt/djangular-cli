@@ -40,7 +40,6 @@ setuptools.setup(
 
     packages=setuptools.find_packages(),
     scripts=[
-        # 'djangular_cli/generate/bin/ng',
         'djangular_cli/generate/bin/django-admin'
     ],
     entry_points={
@@ -67,11 +66,9 @@ setuptools.setup(
     ],
     install_requires=[
         "PyInquirer",
-        "pip",
         "virtualenv",
         "setuptools",
         "django-environ",
-        "distlib",
         "pyfiglet",
     ],
     python_requires='>=3.6',
