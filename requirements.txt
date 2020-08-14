@@ -1,9 +1,9 @@
 # Requirements for Djangular-Cli.
 regex
-PyInquirer
-pip
-virtualenv
-setuptools
+PyInquirer~=1.0.3
+pip~=20.2.2
+virtualenv~=20.0.30
+setuptools~=49.3.1
 django-environ # environ
-distlib
-pyfiglet
+distlib~=0.3.1
+pyfiglet~=0.8.post1
