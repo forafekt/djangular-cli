@@ -4,14 +4,29 @@ import time
 
 import pip  # noqa
 
-from djangular_cli.config.app_settings import OSEnv, djangular_root_dir
+from djangular_cli.config.app_settings import OSEnv, djangular_root_dir, current_dir, cmd
+from djangular_cli.generate.g_venv import cmd_env
+
+
+def is_venv():
+    return (hasattr(sys, 'real_prefix') or
+            (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix))
 
 
 def check_modules():
     """
     Module Check
     """
-    venv_dir = OSEnv['VIRTUAL_ENV']
+    if is_venv():
+        print('inside virtualenv or venv')
+    else:
+        print('outside virtualenv or venv')
+        try:
+            cmd_env()
+        except:
+            exit("Done")
+
+    venv_dir = OSEnv["VIRTUAL_ENV"]
     requirements = djangular_root_dir("dependencies/django.txt")
     modules = "Django"
     reqs = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
