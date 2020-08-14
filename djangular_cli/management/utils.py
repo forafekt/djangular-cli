@@ -2,6 +2,7 @@ from djangular_cli.config.app_settings import \
     current_dir, \
     OSEnv, \
     PathDirName
+from djangular_cli.generate.g_venv import cmd_env
 
 
 class Utils(object):
