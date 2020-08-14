@@ -39,5 +39,11 @@ Angular settings
 NG_ROOT_PATH = current_dir
 NG_EXECUTE = "ng"  # djangular_root_dir("generate/bin/ng")
 
+"""""
+ENV settings
+"""""
+ENV_ROOT_PATH = current_dir
+ENV_EXECUTE = djangular_root_dir("generate/bin/activate_this.py")
+
 
 
