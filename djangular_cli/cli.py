@@ -11,7 +11,6 @@ from djangular_cli.generate.g_angular import cmd_angular
 from djangular_cli.generate.g_django import cmd_django
 from djangular_cli.generate.g_venv import cmd_env
 from djangular_cli.git.git import djangular_boilerplate
-from djangular_cli.management.exceptions import ReqModuleNotExist
 from djangular_cli.management.find import check_modules
 
 
