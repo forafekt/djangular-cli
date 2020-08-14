@@ -1,7 +1,6 @@
 """""
 Client error handler.
 """""
-from djangular_cli.management.find import check_modules
 
 
 class DjangularException(Exception):
