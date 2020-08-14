@@ -63,6 +63,12 @@ def main():
     django = args.django
 
     """""
+    Activate env
+    """""
+
+    # TODO: Make venv args
+
+    """""
     Open client
     """""
     # TODO: TEMP
@@ -70,12 +76,6 @@ def main():
         cli.client()
     else:
         assert ArgDoesNotExist("'djangular -b start'?")
-
-    """""
-    Activate env
-    """""
-
-    # TODO: Make venv args
 
     """""
     Git clone # TEMP
