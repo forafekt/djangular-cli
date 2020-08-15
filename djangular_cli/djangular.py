@@ -5,11 +5,10 @@ Code readability: 'cmd' reused from DJANGUALR settings
 IN DEVELOPMENT
 """""
 import argparse
-import subprocess
-import sys
+import time
 
 from djangular_cli import cli
-from djangular_cli.config.app_settings import cmd, OSget, join
+from djangular_cli.config.app_settings import cmd, join
 from djangular_cli.generate.g_venv import cmd_env
 from djangular_cli.management.exceptions import ArgDoesNotExist
 
@@ -91,25 +90,39 @@ def main():
         """""
         if activate:
             if activate == "activate":
-                venv_path = input("▸ Env path [Leave empty for current directory]: ")
-                venv_name = input("▸ Env name [testenv]: ")
-                if venv_path:
-                    if venv_path[-1] != '/':
-                        venv_path = venv_path + '/'
+                try:
+                    venv_path = join(input("▸ Env path [Leave empty for current directory]: "))
+                    venv_name = join(input("▸ Env name [testenv]: "))
+                    if venv_path:
+                        if venv_path[-1] != '/':
+                            venv_path += '/'
+                    else:
+                        venv_path = ''
+                    env = "{}{}/bin/activate_this.py".format(venv_path, venv_name)
+                    with open(env) as f:
+                        code = compile(f.read(), env, "exec")
+                        exec(code, dict(__file__=env))
+                        fe = ".sh"
+                        input_to_sh = ("#!/bin/bash\n"
+                                       ". {}{}/bin/activate; exec /usr/bin/env bash")
+                        with open('{}/bin/activate_{}{}'.format(venv_name, venv_name, fe), 'w+') as createfile:
+                            createfile.write(input_to_sh.format(venv_path, venv_name))
+
+                        with open('{}/bin/activate_{}{}'.format(venv_name, venv_name, fe), 'r') as file:
+                            filedata = file.read()
+
+                            try:
+                                print("▸ Attempting to activate: " + venv_name)
+                                time.sleep(2)
+                                print("▸ ", venv_name + " Activated.")
+                                run = cmd(filedata)
+                                return run
+                            except:
+                                exit("Ended Session.")
+                except EnvironmentError:
+                    print("Not activated for some reason!!!")
                 else:
-                    venv_path = ''
-                env = f"{venv_path}{venv_name}/bin/activate_this.py"
-                with open(env) as f:
-                    code = compile(f.read(), env, "exec")
-                    e = (code, dict(__file__=env))
-                command = e
-                process = subprocess.Popen(
-                    command,
-                    env={'PATH': OSget('PATH')},
-                )
-                process.wait()
-        else:
-            pass
+                    pass
 
         """""
         Open client

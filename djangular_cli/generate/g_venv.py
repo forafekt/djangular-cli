@@ -1,6 +1,7 @@
 """
 Create Virtual Environment for your project and automatically install requirements.
 """
+
 import pip  # noqa F405
 from virtualenv import cli_run
 
@@ -19,6 +20,7 @@ def cmd_env():
     Choose a name for virtual environment
     Code readability: 'join' / 'expanduser' reused from DJANGUALR settings
     """
+
     # Create, choose path/name and activate the virtual environment
     print("Press Enter to install in current directory: " + current_dir)
     choose_path = input("▸ " + "Choose your Virtualenv path: ")
@@ -35,8 +37,6 @@ def cmd_env():
     with open(activate_file) as f:
         code = compile(f.read(), activate_file, "exec")
         exec(code, dict(__file__=activate_file))
-
-    # Automatically install project requirements
-    requirements = djangular_root_dir("dependencies/requirements.txt")
-    if name_env:
-        pip.main(["install", "--prefix", venv_dir, "-r", requirements])
+        if venv_dir:
+            requirements = djangular_root_dir("dependencies/requirements.txt")
+            pip.main(["install", "--prefix", venv_dir, "-r", requirements])
