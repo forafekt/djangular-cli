@@ -7,9 +7,7 @@ from PyInquirer import prompt
 
 from djangular_cli.config.style.color_style import style
 from djangular_cli.config.style.widget import widget
-from djangular_cli.generate.g_angular import cmd_angular
-from djangular_cli.generate.g_django import cmd_django
-from djangular_cli.generate.g_venv import cmd_env
+from djangular_cli.generate.create import cmd_angular, cmd_env, cmd_django
 from djangular_cli.git.git import djangular_boilerplate
 from djangular_cli.management.find import check_modules
 

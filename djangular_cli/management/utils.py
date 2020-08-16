@@ -2,14 +2,12 @@ from djangular_cli.config.app_settings import \
     current_dir, \
     OSEnv, \
     PathDirName
-from djangular_cli.generate.g_venv import cmd_env
 
 
 class Utils(object):
     """
     Mixin to get commonly used directories in Djangular Commands
     """
-
     def get_default_app(self):
         """
         Get name of the django app that contains the site config.

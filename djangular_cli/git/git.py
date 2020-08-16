@@ -7,51 +7,39 @@ import shutil
 from PyInquirer import prompt
 from distlib._backport import shutil  # noqa F405
 
-from djangular_cli.config.app_settings import cmd, exists, current_dir, change_dir
+from djangular_cli.config.app_settings import cmd, exists, current_dir
+from djangular_cli.management.prompt import prompt_overwrite
 
 
-def confirm(overwrite):
+class Repo:
     """
-    Confirm
-    :param overwrite:
-    :return:
+    Gather repository data to clone.
     """
-    return not overwrite["overwrite"]
 
-
-prompt_overwrite = [
-    {
-        'type': 'confirm',
-        'name': 'overwrite',
-        'message': 'Path already exists! Do you want to overwrite?',
-        'when': lambda overwrite: overwrite.get('overwrite', bool)
-    }
-]
+    def __init__(self):
+        self.git_url = "https://" + input("▸ [github.com][other]: https://")
+        self.user = input("▸ Author: ")
+        self.package_name = input("▸ Package name: ")
+        self.result = "{}/{}/{}.git".format(self.git_url, self.user, self.package_name)
+        self.to_clone = "git clone "
+        self.command = self.to_clone + self.result
+        self.absolute_path = current_dir + "/" + self.package_name
 
 
 def djangular_boilerplate():
     """
-    Clones the passed repo to my staging dir
+    Clone any repository into your project.
     """
-
-    git_url = "https://" + input("▸ "+"[github.com][other]: ")
-    user = input("▸ "+"Author: ")
-    package_name = input("▸ "+"Package name: ")
-
-    result = git_url + "/" + user + "/" + package_name + ".git"
-
-    # Temp method
-    space = " "
-    clone = "git" + space + "clone" + space
-
-    path = current_dir
-
-    if exists(path):
+    git = Repo()
+    path = git.absolute_path
+    package_name = git.package_name
+    clone = git.command
+    if not exists(path):
+        cmd(clone)
+    elif exists(path):
         ow = prompt(prompt_overwrite)
         if ow.get("overwrite", True):
-            if path:
-                shutil.rmtree(package_name)
-                cmd(clone + result)
-            else:
-                change_dir(path)
-                cmd(clone + result)
+            shutil.rmtree(package_name)
+            cmd(clone)
+        else:
+            exit("You have chosen not to overwrite. Session ended.")

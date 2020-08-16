@@ -17,8 +17,7 @@ class ArgDoesNotExist(DjangularException):
 
     def __init__(self, hint) -> None:
         if self.args is ArgDoesNotExist:
-            raise hint
-        return print("\n\n Argument does not exist. Did you mean => %s" % hint)
+            raise ArgDoesNotExist(hint)
 
 
 class ReqModuleNotExist(DjangularException):
@@ -27,7 +26,6 @@ class ReqModuleNotExist(DjangularException):
     """
     def __init__(self, module):
         if self.args is ReqModuleNotExist:
-            raise module
-        return print("Module %s not found: " % module)
+            raise ReqModuleNotExist(module)
 
 

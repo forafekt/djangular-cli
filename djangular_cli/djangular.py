@@ -5,11 +5,11 @@ Code readability: 'cmd' reused from DJANGUALR settings
 IN DEVELOPMENT
 """""
 import argparse
-import time
 
 from djangular_cli import cli
-from djangular_cli.config.app_settings import cmd, join
-from djangular_cli.generate.g_venv import cmd_env
+from djangular_cli.config.app_settings import cmd
+from djangular_cli.generate.create import cmd_env, cmd_angular, cmd_django
+from djangular_cli.management.commands import activate_env
 from djangular_cli.management.exceptions import ArgDoesNotExist
 
 
@@ -49,32 +49,46 @@ def main():
         type=str,
         help='Build Angular to Django static'
     )
-
-    parser.add_argument(
-        '-dj',
-        '--django',
-        type=str,
-        help='New Django project'
-    )
-
     args = parser.parse_args()
+
+    """""
+    Serve
+    """""
     serve = args.serve
-    start = args.generate
+
+    """""
+    Virtualenv
+    """""
     activate = args.virtualenv
     new_env = args.virtualenv
+
+    """""
+    Git
+    """""
     clone = args.git_clone
-    django = args.django
+
+    """""
+    Generate
+    """""
+    django = args.generate
+    angular = args.generate
+    start = args.generate
 
     #    if not os.path.isfile(p):
     #        print('The specified source file does not exist')
     #        sys.exit()
 
-    if not args:
-        raise ArgDoesNotExist("Did you mean...\n"
-                              "-g start\n"
-                              "-env activate\n"
-                              "-env new\n"
-                              "-gc https://github.com/user/package")
+    arg_is_none = ArgDoesNotExist("Argument does not exist. Did you mean...\n"
+                                  "djangular -g start\n"
+                                  "djangular -g django\n"
+                                  "djangular -g angular\n"
+                                  "djangular -env activate\n"
+                                  "djangular -env new\n"
+                                  "djangular -gc https://github.com/user/package")
+
+    if args is None:
+        raise arg_is_none
+
     try:
         """""
         New env
@@ -88,46 +102,15 @@ def main():
         """""
         Activate env
         """""
-        if activate:
-            if activate == "activate":
-                try:
-                    venv_path = join(input("▸ Env path [Leave empty for current directory]: "))
-                    venv_name = join(input("▸ Env name [testenv]: "))
-                    if venv_path:
-                        if venv_path[-1] != '/':
-                            venv_path += '/'
-                    else:
-                        venv_path = ''
-                    env = "{}{}/bin/activate_this.py".format(venv_path, venv_name)
-                    with open(env) as f:
-                        code = compile(f.read(), env, "exec")
-                        exec(code, dict(__file__=env))
-                        fe = ".sh"
-                        input_to_sh = ("#!/bin/bash\n"
-                                       ". {}{}/bin/activate; exec /usr/bin/env bash")
-                        with open('{}/bin/activate_{}{}'.format(venv_name, venv_name, fe), 'w+') as createfile:
-                            createfile.write(input_to_sh.format(venv_path, venv_name))
-
-                        with open('{}/bin/activate_{}{}'.format(venv_name, venv_name, fe), 'r') as file:
-                            filedata = file.read()
-
-                            try:
-                                print("▸ Attempting to activate: " + venv_name)
-                                time.sleep(2)
-                                print("▸ ", venv_name + " Activated.")
-                                run = cmd(filedata)
-                                return run
-                            except:
-                                exit("Ended Session.")
-                except EnvironmentError:
-                    print("Not activated for some reason!!!")
-                else:
-                    pass
+        if activate and activate == "activate":
+            activate_env()
+        else:
+            pass
 
         """""
         Open client
         """""
-        if start == "start":
+        if start and start == "start":
             cli.client()
         else:
             pass
@@ -142,15 +125,23 @@ def main():
         Build Angular to Django static
         """""
         # TODO: Make build script args
-        """""
-        Create Django project
-        """""
-        # TODO: Make gen django args
 
         """""
         Create Django project
         """""
-        # TODO: Make gen angular args
+        if django and django == "django":
+            cmd_django()
+        else:
+            pass
+
+        """""
+        Create Angular project
+        """""
+        if angular and angular == "angular":
+            cmd_angular()
+        else:
+            pass
+
     except KeyboardInterrupt:
         print("\n => You have force cancelled the session.\n")
 

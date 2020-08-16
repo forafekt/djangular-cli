@@ -4,11 +4,15 @@ import time
 
 import pip  # noqa
 
-from djangular_cli.config.app_settings import OSEnv, djangular_root_dir, current_dir, cmd
-from djangular_cli.generate.g_venv import cmd_env
+from djangular_cli.config.app_settings import OSEnv, djangular_root_dir
+from djangular_cli.generate.create import cmd_env
 
 
 def is_venv():
+    """
+    Check for env
+    :return:
+    """
     return (hasattr(sys, 'real_prefix') or
             (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix))
 
@@ -41,6 +45,10 @@ def check_modules():
         print(modules, "is installed. Please continue to enter your project name..\n")
     else:
         print("▸", modules, "not installed...\n"
-                            f"=> Installing {modules} ...")
+                            "=> Installing {} ...".format(modules))
         time.sleep(5)
-        pip.main(["install", "--prefix", venv_dir, "-r", requirements])
+        try:
+            subprocess.Popen(["pip", "install", "--prefix", venv_dir, "-r", requirements])
+        except:
+            print("▸ ...Using 'pip3'")
+            subprocess.Popen(["pip3", "install", "--prefix", venv_dir, "-r", requirements])
