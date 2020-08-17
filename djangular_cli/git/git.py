@@ -4,11 +4,11 @@ Code readability: cmd, exists, current_dir, change_dir reused from DJANGULAR set
 """
 import shutil
 
-from PyInquirer import prompt
+from djangular_cli.terminal import prompt
 from distlib._backport import shutil  # noqa F405
 
 from djangular_cli.config.app_settings import cmd, exists, current_dir
-from djangular_cli.management.prompt import prompt_overwrite
+from djangular_cli.management.prompts import prompt_overwrite
 
 
 class Repo:

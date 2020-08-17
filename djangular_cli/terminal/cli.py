@@ -3,8 +3,7 @@ Main Client.
 """""
 from __future__ import print_function, unicode_literals
 
-from PyInquirer import prompt
-
+from djangular_cli.terminal.prompt import prompt
 from djangular_cli.config.style.color_style import style
 from djangular_cli.config.style.widget import widget
 from djangular_cli.generate.create import cmd_angular, cmd_env, cmd_django

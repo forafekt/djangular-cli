@@ -1,5 +1,6 @@
-from prompt_toolkit.styles import style_from_dict
-from PyInquirer import Token
+from djangular_cli.terminal import style_from_dict
+
+from djangular_cli.terminal import Token
 
 style = style_from_dict({
     Token.QuestionMark: '#E91E63 bold',

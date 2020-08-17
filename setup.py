@@ -65,7 +65,7 @@ setuptools.setup(
         'Topic :: Software Development :: Build Tools',
     ],
     install_requires=[
-        "PyInquirer",
+        "prompt_toolkit",
         "virtualenv",
         "setuptools",
         "django-environ",

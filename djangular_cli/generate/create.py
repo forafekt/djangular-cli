@@ -52,12 +52,12 @@ def cmd_env():
         code = compile(f.read(), activate_file, "exec")
         exec(code, dict(__file__=activate_file))
 
-    if venv_dir:
-        try:
-            Popen(["pip", "install", "--prefix", venv_dir, "-r", data.requirements])
-        except:
-            print("▸ ...Using 'pip3'")
-            Popen(["pip3", "install", "--prefix", venv_dir, "-r", data.requirements])
+#    if venv_dir:
+#        try:
+#            Popen(["pip", "install", "--prefix", venv_dir, "-r", data.requirements])
+#        except:
+#            print("▸ ...Using 'pip3'")
+#            Popen(["pip3", "install", "--prefix", venv_dir, "-r", data.requirements])
 
 
 def cmd_django():
@@ -88,7 +88,7 @@ def cmd_angular():
     """
     Start Angular project.
     """
-    ng_executable_path = getattr(app_settings, 'NG_EXECUTE', 'django-admin')
+    ng_executable_path = getattr(app_settings, 'NG_EXECUTE', 'ng')
     command = [ng_executable_path, 'new', '--routing', '--style=scss']
     process = Popen(
         command,

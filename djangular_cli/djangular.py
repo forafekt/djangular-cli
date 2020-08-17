@@ -5,12 +5,12 @@ Code readability: 'cmd' reused from DJANGUALR settings
 IN DEVELOPMENT
 """""
 import argparse
-
-from djangular_cli import cli
+from djangular_cli.terminal import cli
 from djangular_cli.config.app_settings import cmd
 from djangular_cli.generate.create import cmd_env, cmd_angular, cmd_django
 from djangular_cli.management.commands import activate_env
 from djangular_cli.management.exceptions import ArgDoesNotExist
+from djangular_cli.management.find import check_modules
 
 
 def main():
@@ -85,11 +85,11 @@ def main():
                                   "djangular -env activate\n"
                                   "djangular -env new\n"
                                   "djangular -gc https://github.com/user/package")
-
-    if args is None:
+    if args == str is None:
         raise arg_is_none
 
     try:
+
         """""
         New env
         """""
@@ -124,12 +124,14 @@ def main():
         """""
         Build Angular to Django static
         """""
-        # TODO: Make build script args
+        if serve:
+            "something"
 
         """""
-        Create Django project
+        Create Django project & check virtualenv / required modules
         """""
         if django and django == "django":
+            check_modules()
             cmd_django()
         else:
             pass
