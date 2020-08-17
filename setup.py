@@ -51,7 +51,7 @@ setuptools.setup(
     author="Jonny Doyle",
     author_email="jonathan.d@programmer.net",
     license="MIT",
-    description="Django / Angular project management.",
+    description="Django + Angular client for complete project management & development.",
     keywords="django angular client template boilerplate git automate",
     platform="Python",
     long_description=long_description,
