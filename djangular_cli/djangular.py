@@ -125,7 +125,7 @@ def main():
         Build Angular to Django static
         """""
         if serve:
-            "something"
+            "Do something"  # TODO: Sister package djangular-serve
 
         """""
         Create Django project & check virtualenv / required modules
