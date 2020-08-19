@@ -68,7 +68,7 @@ Quick commands:
 New Django project      : djangular - g django
 New Angular project     : djangular -g angular
 New Virtualenv          : djangular -env new
-Activage Virtualenv     : djangular -env activate
+Activate Virtualenv     : djangular -env activate
 Git Clone               : djangular -gc https://github.com/user/package
 Build Angular to Django : djangular -srv .... [In development for sister package DJANGULAR-SERVE
 ```
