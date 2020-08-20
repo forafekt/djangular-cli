@@ -12,6 +12,8 @@ This is for developers that intend on using Django as a back-end to their Angula
 The methodology to using this client is to build a complete front-env application in angular and build it
 to Django static to serve a single application.
 
+![example](example.png)
+
 # IMPORTANT
 THIS PROJECT IS STILL IN DEVELOPMENT!
 
