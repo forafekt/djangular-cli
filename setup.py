@@ -70,6 +70,7 @@ setuptools.setup(
         "setuptools",
         "django-environ",
         "pyfiglet",
+        "pygments",
     ],
     python_requires='>=3.6',
 )
