@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
 from contextlib import contextmanager
-from . import PromptParameterException, prompts
-from .prompts import list, confirm, input, password, checkbox, rawlist, expand, editor
 from prompt_toolkit.patch_stdout import patch_stdout as pt_patch_stdout
 from prompt_toolkit.shortcuts import PromptSession
 from prompt_toolkit.application import Application
+from . import PromptParameterException, prompts
+from .prompts import list, confirm, input, password, checkbox, rawlist, expand, editor
+
+__all__ = ["prompts", "list", "confirm", "input", "password", "checkbox", "rawlist", "expand", "editor"]
 
 
 def prompt(questions, answers=None, **kwargs):
-    from . import prompts
-
     if isinstance(questions, dict):
         questions = [questions]
     answers = answers or {}
@@ -55,12 +55,12 @@ def prompt(questions, answers=None, **kwargs):
                             'Problem in \'when\' check of %s question: %s' %
                             (name, e))
                 else:
-                    raise ValueError('\'when\' needs to be function that ' \
+                    raise ValueError('\'when\' needs to be function that '
                                      'accepts a dict argument')
             if filter:
                 # at least a little sanity check!
                 if not callable(question['filter']):
-                    raise ValueError('\'filter\' needs to be function that ' \
+                    raise ValueError('\'filter\' needs to be function that '
                                      'accepts an argument')
 
             if callable(question.get('default')):
@@ -96,7 +96,7 @@ def prompt(questions, answers=None, **kwargs):
             raise ValueError('No question type \'%s\'' % type_)
         except KeyboardInterrupt as exc:
             if raise_kbi:
-                raise exc from None
+                raise exc(None)
             if kbi_msg:
                 print('')
                 print(kbi_msg)
