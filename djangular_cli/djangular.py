@@ -5,12 +5,13 @@ Code readability: 'cmd' reused from DJANGUALR settings
 IN DEVELOPMENT
 """""
 import argparse
-from djangular_cli.terminal import cli
-from djangular_cli.config.app_settings import cmd
+
 from djangular_cli.generate.create import cmd_env, cmd_angular, cmd_django
+from djangular_cli.git.git import djangular_boilerplate
 from djangular_cli.management.commands import activate_env
 from djangular_cli.management.exceptions import ArgDoesNotExist
 from djangular_cli.management.find import check_modules
+from djangular_cli.terminal import cli
 
 
 def main():
@@ -118,8 +119,9 @@ def main():
         """""
         Git clone # TEMP
         """""
-        if clone:
-            cmd("git " + "clone " + clone)
+        if clone and clone == "clone":
+            # cmd("git " + "clone " + clone)
+            djangular_boilerplate()
 
         """""
         Build Angular to Django static
