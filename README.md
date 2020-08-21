@@ -19,7 +19,7 @@ THIS PROJECT IS STILL IN DEVELOPMENT!
 
 
 # Pypi
-* https://pypi.org/project/djangular-cli/1.2.1.dev2/
+* https://pypi.org/project/djangular-cli/1.2.4.dev2/
 
 #### Version
 ![PyPI](https://img.shields.io/pypi/v/djangular-cli)
@@ -71,7 +71,7 @@ New Django project      : djangular - g django
 New Angular project     : djangular -g angular
 New Virtualenv          : djangular -env new
 Activate Virtualenv     : djangular -env activate
-Git Clone               : djangular -gc https://github.com/user/package
+Git Clone               : djangular -gc clone
 Build Angular to Django : djangular -srv .... [In development for sister package DJANGULAR-SERVE
 ```
 
