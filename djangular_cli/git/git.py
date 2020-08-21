@@ -2,13 +2,14 @@
 Simple Git clone tool
 Code readability: cmd, exists, current_dir, change_dir reused from DJANGULAR settings
 """
+import os
 import shutil
 
-from djangular_cli.terminal import prompt
+from djangular_cli.terminal.prompt import prompt
 from distlib._backport import shutil  # noqa F405
 
 from djangular_cli.config.app_settings import cmd, exists, current_dir
-from djangular_cli.management.prompts import prompt_overwrite
+from djangular_cli.terminal.custom_prompts import prompt_overwrite, prompt_rename
 
 
 class Repo:
@@ -36,10 +37,18 @@ def djangular_boilerplate():
     clone = git.command
     if not exists(path):
         cmd(clone)
+        rename = prompt(prompt_rename)
+        if rename.get("rename", True):
+            os.rename(package_name, input("Rename directory: "))
+        else:
+            pass
     elif exists(path):
         ow = prompt(prompt_overwrite)
         if ow.get("overwrite", True):
             shutil.rmtree(package_name)
             cmd(clone)
+            rename = prompt(prompt_rename)
+            if rename.get("rename", True):
+                os.rename(package_name, input("Rename directory: "))
         else:
             exit("You have chosen not to overwrite. Session ended.")
