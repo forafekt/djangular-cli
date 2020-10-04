@@ -1,7 +1,8 @@
+import os
 import subprocess
 import sys
 import time
-from djangular_cli.config.app_settings import OSEnv, djangular_root_dir
+from djangular_cli.config.app_settings import djangular_root_dir
 from djangular_cli.generate.create import cmd_env
 
 
@@ -38,7 +39,7 @@ def check_modules():
     """
     check_env()
     if is_venv():
-        venv_dir = OSEnv["VIRTUAL_ENV"]
+        venv_dir = os.environ["VIRTUAL_ENV"]
         requirements = djangular_root_dir("dependencies/django.txt")
         modules = "Django"
         reqs = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])

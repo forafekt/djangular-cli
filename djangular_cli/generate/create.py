@@ -1,15 +1,12 @@
 """
 Create Virtual Environment for your project and automatically install requirements.
 """
+import os
 from subprocess import Popen
 from virtualenv import cli_run
 
 from djangular_cli.config import app_settings
-from djangular_cli.config.app_settings import \
-    djangular_root_dir, \
-    current_dir, \
-    join, \
-    expanduser, OSget
+from djangular_cli.config.app_settings import djangular_root_dir
 
 
 class Env:
@@ -33,31 +30,24 @@ def cmd_env():
     """
     data = Env()
 
-    print("To install in current directory [Enter]: " + current_dir)
+    print("To install in current directory [Enter]: " + os.getcwd())
     choose_path = data.choose_path
     name_env = data.name_env
-    venv_dir = join(expanduser(choose_path), name_env)
+    venv_dir = os.path.join(os.path.expanduser(choose_path), name_env)
     cli_run([venv_dir])
 
     if choose_path or name_env:
         print("▸ Virtualenv path: ", str(choose_path + ": " + name_env))
     else:
         if choose_path == "":
-            print("▸ Virtualenv path: ", str(current_dir + ": " + name_env))
+            print("▸ Virtualenv path: ", str(os.getcwd() + ": " + name_env))
 
     print("▸ Activate {} with 'djangular -env activate'".format(name_env))
 
-    activate_file = join(venv_dir, "bin", "activate_this.py")
+    activate_file = os.path.join(venv_dir, "bin", "activate_this.py")
     with open(activate_file) as f:
         code = compile(f.read(), activate_file, "exec")
         exec(code, dict(__file__=activate_file))
-
-#    if venv_dir:
-#        try:
-#            Popen(["pip", "install", "--prefix", venv_dir, "-r", data.requirements])
-#        except:
-#            print("▸ ...Using 'pip3'")
-#            Popen(["pip3", "install", "--prefix", venv_dir, "-r", data.requirements])
 
 
 def cmd_django():
@@ -69,10 +59,10 @@ def cmd_django():
                input("▸ " + "Django Project Name [djng_project]: ")]
     process = Popen(
         command,
-        env={'PATH': OSget('PATH')},
+        env={'PATH': os.environ.get('PATH')},
     )
     process.wait()
-    return print("▸", "New Django project created in: ", current_dir)
+    return print("▸", "New Django project created in: ", os.getcwd())
 
 
 def get_django_root_path():
@@ -92,7 +82,7 @@ def cmd_angular():
     command = [ng_executable_path, 'new', '--routing', '--style=scss']
     process = Popen(
         command,
-        env={'PATH': OSget('PATH')},
+        env={'PATH': os.environ.get('PATH')},
     )
     process.wait()
 

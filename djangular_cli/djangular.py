@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 """""
 DJANGULAR CLI args
-Code readability: 'cmd' reused from DJANGUALR settings
 IN DEVELOPMENT
 """""
 import argparse
+
+from pip._internal.locations import site_packages  # noqa
 
 from djangular_cli.generate.create import cmd_env, cmd_angular, cmd_django
 from djangular_cli.git.git import djangular_boilerplate
@@ -12,6 +13,13 @@ from djangular_cli.management.commands import activate_env
 from djangular_cli.management.exceptions import ArgDoesNotExist
 from djangular_cli.management.find import check_modules
 from djangular_cli.terminal import cli
+
+module = "djangular_serve"
+if module in site_packages:
+    try:
+        from djangular_serve.objects import ng_deploy  # noqa
+    except ModuleNotFoundError:
+        print("Please install djangular-serve: 'pip install djangular-serve' or 'pip3 install djangular-serve'")
 
 
 def main():
@@ -45,7 +53,7 @@ def main():
     )
 
     parser.add_argument(
-        '-srv',
+        '-s',
         '--serve',
         type=str,
         help='Build Angular to Django static'
@@ -126,8 +134,10 @@ def main():
         """""
         Build Angular to Django static
         """""
-        if serve:
-            "Do something"  # TODO: Sister package djangular-serve
+        if serve and serve == "build":
+            ng_deploy()
+        else:
+            pass
 
         """""
         Create Django project & check virtualenv / required modules

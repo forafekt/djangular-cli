@@ -1,6 +1,5 @@
+import os
 import time
-
-from djangular_cli.config.app_settings import cmd
 from djangular_cli.generate.create import Env as getEnv
 
 
@@ -29,10 +28,10 @@ def activate_env():
                 filedata = file.read()
                 # Execute script
                 try:
-                    print("▸ Attempting to activate: " + venv_name)
+                    print(f"▸ Attempting to activate: {venv_name}")
                     time.sleep(2)
-                    print("▸ ", venv_name + " Activated.")
-                    cmd(filedata)
+                    print(f"▸ {venv_name} Activated.")
+                    os.system(filedata)
                 except exit as End:
                     End("There was an error activating the {}.".format(venv_name))
     except EnvironmentError:

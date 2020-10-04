@@ -4,11 +4,6 @@ DJANGULAR reusable settings
 import environ
 import os
 
-"""""
-Reuse import os 
-So we only have to import once
-importing from here will only import the needed os attributes
-"""""
 current_dir = os.getcwd()
 join = os.path.join
 expanduser = os.path.expanduser

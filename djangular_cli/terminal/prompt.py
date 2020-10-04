@@ -7,7 +7,7 @@ from prompt_toolkit.application import Application
 from . import PromptParameterException, prompts
 from .prompts import list, confirm, input, password, checkbox, rawlist, expand, editor
 
-__all__ = ["prompts", "list", "confirm", "input", "password", "checkbox", "rawlist", "expand", "editor"]
+__all__ = ["prompt", "prompts", "list", "confirm", "input", "password", "checkbox", "rawlist", "expand", "editor"]
 
 
 def prompt(questions, answers=None, **kwargs):

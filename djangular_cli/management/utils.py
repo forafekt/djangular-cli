@@ -1,7 +1,4 @@
-from djangular_cli.config.app_settings import \
-    current_dir, \
-    OSEnv, \
-    PathDirName
+import os
 
 
 class Utils(object):
@@ -12,7 +9,7 @@ class Utils(object):
         """
         Get name of the django app that contains the site config.
         """
-        return OSEnv["DJANGO_SETTINGS_MODULE"].replace('.settings', '')
+        return os.environ["DJANGO_SETTINGS_MODULE"].replace('.settings', '')
 
     def get_default_path(self):
         """
@@ -25,7 +22,7 @@ class Utils(object):
         """
         Get the absolute path of app.
         """
-        return current_dir
+        return os.getcwd()
 
     def get_root(self):
         """
@@ -34,5 +31,5 @@ class Utils(object):
         default_site = self.get_default_app()
         path = self.get_default_path()
         for _ in range(len(default_site.split('.'))):
-            path = PathDirName(path)
+            path = os.path.dirname(path)
         return path
