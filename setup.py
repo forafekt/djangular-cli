@@ -67,10 +67,11 @@ setuptools.setup(
     install_requires=[
         "prompt_toolkit",
         "virtualenv",
+        "setuptools",
         "django-environ",
         "pyfiglet",
         "pygments",
-        #"djangular-serve",
+        "djangular-serve",
     ],
     python_requires='>=3.6',
 )
