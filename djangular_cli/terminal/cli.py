@@ -76,9 +76,10 @@ def client():
             else:
                 pass
     except KeyboardInterrupt:
-        print("\n => You have force cancelled the session.\n")
-
-        exit("Thank You for using Djangular.  Please visit https://djangular.com")
+        try:
+            exit(0)
+        except:
+            exit(1)
 
 
 if __name__ == '__main__':
