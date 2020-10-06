@@ -4,8 +4,7 @@ DJANGULAR CLI args
 IN DEVELOPMENT
 """""
 import argparse
-
-from pip._internal.locations import site_packages  # noqa
+import os
 
 from djangular_cli.generate.create import cmd_env, cmd_angular, cmd_django
 from djangular_cli.git.git import djangular_boilerplate
@@ -13,13 +12,6 @@ from djangular_cli.management.commands import activate_env
 from djangular_cli.management.exceptions import ArgDoesNotExist
 from djangular_cli.management.find import check_modules
 from djangular_cli.terminal import cli
-
-module = "djangular_serve"
-if module in site_packages:
-    try:
-        from djangular_serve.objects import ng_deploy  # noqa
-    except ModuleNotFoundError:
-        print("Please install djangular-serve: 'pip install djangular-serve' or 'pip3 install djangular-serve'")
 
 
 def main():
@@ -93,11 +85,45 @@ def main():
                                   "djangular -g angular\n"
                                   "djangular -env activate\n"
                                   "djangular -env new\n"
-                                  "djangular -gc https://github.com/user/package")
-    if args == str is None:
+                                  "djangular -gc https://github.com/user/package\n"
+                                  "djangular -s serve")
+    if not args:
         raise arg_is_none
 
     try:
+        """""
+        Open client
+        """""
+        if start:
+            if start == "start":
+                cli.client()
+            else:
+                pass
+        else:
+            pass
+
+        """""
+        Create Django project & check virtualenv / required modules
+        """""
+        if django:
+            if django == "django":
+                check_modules()
+                cmd_django()
+            else:
+                pass
+        else:
+            pass
+
+        """""
+        Create Angular project
+        """""
+        if angular:
+            if angular == "angular":
+                cmd_angular()
+            else:
+                pass
+        else:
+            pass
 
         """""
         New env
@@ -105,59 +131,52 @@ def main():
         if new_env:
             if new_env == "new":
                 cmd_env()
+            else:
+                pass
         else:
             pass
 
         """""
         Activate env
         """""
-        if activate and activate == "activate":
-            activate_env()
-        else:
-            pass
-
-        """""
-        Open client
-        """""
-        if start and start == "start":
-            cli.client()
+        if activate:
+            if activate == "activate":
+                activate_env()
+            else:
+                pass
         else:
             pass
 
         """""
         Git clone # TEMP
         """""
-        if clone and clone == "clone":
-            # cmd("git " + "clone " + clone)
-            djangular_boilerplate()
+        if clone:
+            if clone == "clone":
+                # cmd("git " + "clone " + clone)
+                djangular_boilerplate()
+            else:
+                pass
+        else:
+            pass
 
         """""
         Build Angular to Django static
         """""
-        if serve and serve == "build":
-            ng_deploy()
-        else:
-            pass
-
-        """""
-        Create Django project & check virtualenv / required modules
-        """""
-        if django and django == "django":
-            check_modules()
-            cmd_django()
-        else:
-            pass
-
-        """""
-        Create Angular project
-        """""
-        if angular and angular == "angular":
-            cmd_angular()
+        if serve:
+            if serve == "serve":
+                try:
+                    os.system("serve -s ng")
+                except:
+                    print("\nPlease run:  'serve -s ng' to build Angular to Django.\n\n"
+                          "See https://github.com/forafekt/djangular-serve for more information.")
+            else:
+                pass
         else:
             pass
 
     except KeyboardInterrupt:
-        print("\n => You have force cancelled the session.\n")
+        exit("\n => You have force cancelled the session.\n"
+             "Thank You for using Djangular-CLI.  Please visit https://djangular.com")
 
 
 if __name__ == '__main__':
